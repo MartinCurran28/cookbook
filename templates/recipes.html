@@ -19,25 +19,19 @@
             </div>
             <div class="collapsible-body">
               <span>
-                {{recipe["ingredients"][0]}}
+                {% for ingredient in recipe.ingredients %}
+                   <option value="{{ingredient}}">{{ingredient}}</option>
+                {% endfor %}
+                <br>   
                 <br>
-                {{recipe["ingredients"][1]}}
-                <br>
-                {{recipe["ingredients"][2]}}
-                <br> 
-                <br>
-                {{recipe["directions"][0]}}
-                <br>
-                {{recipe["directions"][1]}}
-                <br>
-                {{recipe["directions"][2]}}
-                <br>
-                {{recipe["directions"][3]}}
+                {% for direction in recipe.directions %}
+                   <option value="{{direction}}">{{direction}}</option>
+                {% endfor %}
                 <br>
                 <br>
-                {{ recipe.prep_time }}
+                Preparation Time: {{ recipe.prep_time }}
                 <br>
-                {{ recipe.cooking_time }}
+                Cooking Time: {{ recipe.cooking_time }}
               </span>
               
             </div>
