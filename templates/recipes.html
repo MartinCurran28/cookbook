@@ -1,11 +1,9 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
-<div class="container">
         
    <div class="row">
-    <ul class="collapsible" data-collapsible="accordion">
+      <ul class="collapsible" data-collapsible="accordion">
         {% for recipe in recipes %}
         <li>
             <div class="collapsible-header">
@@ -19,27 +17,24 @@
             </div>
             <div class="collapsible-body">
               <span>
-                {% for ingredient in recipe.ingredients %}
-                   <option value="{{ingredient}}">{{ingredient}}</option>
-                {% endfor %}
-                <br>   
-                <br>
+                    {% for ingredient in recipe.ingredients %}
+                      <option value="{{ingredient}}">{{ingredient}}</option>
+                    {% endfor %}
+
                 {% for direction in recipe.directions %}
-                   <option value="{{direction}}">{{direction}}</option>
+                  <div value="{{direction}}">{{direction}}</div>
                 {% endfor %}
-                <br>
-                <br>
+                
                 Preparation Time: {{ recipe.prep_time }}
                 <br>
                 Cooking Time: {{ recipe.cooking_time }}
               </span>
+            </div>  
               
-            </div>
+            
         </li>
         
-
-    </ul>
+      </ul>
    </div>
 {% endfor %}
-</div>
 {% endblock %}
