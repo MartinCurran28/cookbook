@@ -1,0 +1,6 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:100,200,300,400,500,600,700|Exo:100,200,300,400,500,600,700');
+
+.jumbotron {
+      margin-bottom: 0;
+      background: url('../images/sandwich.jpg');
+}
