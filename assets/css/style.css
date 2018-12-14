@@ -1,6 +1,21 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:100,200,300,400,500,600,700|Exo:100,200,300,400,500,600,700');
 
-.jumbotron {
+/* Remove the navbar's default rounded borders and increase the bottom margin */ 
+    .navbar {
+      margin-bottom: 50px;
+      border-radius: 0;
+      background-color: #4C4CFF;
+      font: #ffffff;
+    }
+    
+    /* Remove the jumbotron's default bottom margin */ 
+     .jumbotron {
       margin-bottom: 0;
-      background: url('../images/sandwich.jpg');
-}
+      background: url('../images/sandwich.jpg') ;
+      background-position: 0% 25%;
+      background-size: 100% 100%;
+      background-repeat: no-repeat;
+      color: white;
+      text-shadow: black 0.3em 0.3em 0.3em;
+    }
+	
