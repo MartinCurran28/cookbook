@@ -11,6 +11,8 @@
             <div class="collapsible-header">
                 <div class="col s4">
                     <i class="material-icons">expand_more</i>
+                    <a href="{{url_for('add_recipe', recipe_id=recipe._id)}}" class="waves-effect waves-light btn btn_small blue">Add</a>
+                    <a href="{{url_for('edit_recipe', recipe_id=recipe._id)}}" class="waves-effect waves-light btn btn_small blue">Edit</a>
                 </div>
                 
                 <div class="recipe_header col s9">
@@ -30,11 +32,7 @@
                 <br>
                 <strong>Cooking Time:</strong> {{ recipe.cooking_time }}
                 <br>
-                <div class="image" id="blah"></div>
               </span>
-              
-              
-              
               
               
              </div>
@@ -44,7 +42,6 @@
         {% endfor %}
       </ul>
       
-      <div id="counterVisitor"></div>
    </div>
 </div>   
 {% endblock %}
