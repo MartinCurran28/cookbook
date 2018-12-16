@@ -11,9 +11,6 @@ app.config["MONGO_URI"] = 'mongodb://admin:Vonnegut28@ds227654.mlab.com:27654/my
 mongo = PyMongo(app)
 
 @app.route('/')
-@app.route('/get_categories')
-def get_categories():
-    return render_template("categories.html")
 
 @app.route('/get_recipes')
 def get_recipes():
@@ -40,7 +37,7 @@ def edit_recipe(recipe_id):
 @app.route('/update_recipe/<recipe_id>', methods=["POST"])
 def update_recipe(recipe_id):
     recipes = mongo.db.recipes
-    recipes.update( {"_id": ObjectId(recipe_id)},
+    recipes.update({"_id": ObjectId(recipe_id)},
     {
         'recipe_name':request.form.get['recipe_name'],
         'category_name':request.form.get['category_name'],
@@ -51,6 +48,18 @@ def update_recipe(recipe_id):
     })
     return redirect(url_for('get_recipes'))
     
+@app.route('/delete_recipe/<recipe_id>')
+def delete_recipe(recipe_id):
+    mongo.db.recipes.remove({"_id": ObjectId(recipe_id)})
+    return redirect(url_for('get_recipes'))
+    
+    
+    
+    
+    
+@app.route('/get_categories')
+def get_categories():
+    return render_template("categories.html")    
 
 @app.route('/add_user')
 def add_user():

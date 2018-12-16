@@ -11,9 +11,9 @@
     /* Remove the jumbotron's default bottom margin */ 
      .jumbotron {
       margin-bottom: 0;
-      background: url('../images/sandwich.jpg') ;
+      background: url('../images/hello.jpg');
       background-position: 0% 25%;
-      background-size: 100% 100%;
+      background-size: 50% 50%;
       background-repeat: no-repeat;
       color: white;
       text-shadow: black 0.3em 0.3em 0.3em;
