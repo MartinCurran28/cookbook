@@ -53,25 +53,10 @@ def delete_recipe(recipe_id):
     mongo.db.recipes.remove({"_id": ObjectId(recipe_id)})
     return redirect(url_for('get_recipes'))
     
-    
-    
-    
-    
 @app.route('/get_categories')
 def get_categories():
     return render_template("categories.html")    
 
-@app.route('/add_user')
-def add_user():
-    return render_template("user_registration.html")
-    
-
-@app.route('/insert_user', methods=['POST', 'GET'])
-def insert_user():
-    users = mongo.db.users
-    users.insert_one(request.form.to_dict())
-    session['username'] = request.form['username']
-    return redirect(url_for('entry'))    
     
 if __name__ == "__main__":
     app.secret_key = 'mysecret'
