@@ -1,7 +1,9 @@
 import os
+import json
 from flask import Flask, render_template, redirect, request, session, url_for
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
+from pymongo import MongoClient
 
 app = Flask(__name__)
 
@@ -11,6 +13,22 @@ app.config["MONGO_URI"] = 'mongodb://admin:Vonnegut28@ds227654.mlab.com:27654/my
 mongo = PyMongo(app)
 
 @app.route('/')
+@app.route('/graphs')
+def graphs():
+    return render_template('graphs.html')
+    
+@app.route("/recipes/data")
+def recipes():
+    FIELDS = {
+        '_id': False, 'recipe_name': True, 'ingredients': True,
+        'vegan': True, 'recipe_author': True, 'cuisine':True
+    }
+    with MongoClient('mongodb://admin:Vonnegut28@ds227654.mlab.com:27654/myveryowncookbook') as conn:
+        collection = conn['myveryowncookbook']['recipes']
+        projects = collection.find(projection=FIELDS)
+        return json.dumps(list(projects))
+
+    
 
 @app.route('/get_recipes')
 def get_recipes():
