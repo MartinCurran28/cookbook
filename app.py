@@ -21,7 +21,8 @@ def graphs():
 def recipes():
     FIELDS = {
         '_id': False, 'recipe_name': True, 'ingredients': True,
-        'vegan': True, 'recipe_author': True, 'cuisine':True
+        'calories': True, 'recipe_author': True, 'cuisine':True,
+        'category_name': True
     }
     with MongoClient('mongodb://admin:Vonnegut28@ds227654.mlab.com:27654/myveryowncookbook') as conn:
         collection = conn['myveryowncookbook']['recipes']
