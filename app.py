@@ -13,6 +13,11 @@ app.config["MONGO_URI"] = 'mongodb://admin:Vonnegut28@ds227654.mlab.com:27654/my
 mongo = PyMongo(app)
 
 @app.route('/')
+@app.route('/get_recipes')
+def get_recipes():
+    return render_template("recipes.html", 
+    recipes=mongo.db.recipes.find())
+
 @app.route('/graphs')
 def graphs():
     return render_template('graphs.html')
@@ -29,12 +34,6 @@ def recipes():
         projects = collection.find(projection=FIELDS)
         return json.dumps(list(projects))
 
-    
-
-@app.route('/get_recipes')
-def get_recipes():
-    return render_template("recipes.html", 
-    recipes=mongo.db.recipes.find())
 
 @app.route('/add_recipe')
 def add_recipe():

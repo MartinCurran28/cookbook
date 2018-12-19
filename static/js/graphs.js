@@ -9,7 +9,6 @@ function makeGraphs(error, recipesData){
 //       d.calories = parseInt(d.calories);
 //   });
    
-   
    show_category_total(ndx);
    show_recipes_total(ndx);
    

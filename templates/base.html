@@ -25,17 +25,42 @@
             $('select').material_select();
           });
           
-          function LikeUnLikeButton() {
-            $(".like-Unlike").click(function (e) {
-                if ($(this).html() == "Like") {
-                    $(this).html('Unlike');
-                }
-                else {
-                    $(this).html('Like');
-                }
-            });
+        ////* View Counter */////  
+          
+        var n = localStorage.getItem('on_load_counter');
+             if (n === null) {
+              n = 0;
+            }
+            n++;
+            
+            localStorage.setItem("on_load_counter", n);
+            
+            nums = n.toString().split('').map(Number);
+            document.getElementById('CounterVisitor').innerHTML = '';
+            for (var i of nums) {
+              document.getElementById('CounterVisitor').innerHTML += '<span class="counter-item">' + i + '</span>';
+            }
+            
+            
+        var element = document.getElementById("result");
+        
+	
+	////* Like Counter */////
+	
+        function clickCounter(){
+	            if (localStorage.clickcount) {
+	                localStorage.clickcount = Number(localStorage.clickcount) + 1;
+            	} else {
+	                localStorage.clickcount = 1;
+	            }
+	            element.innerHTML = localStorage.clickcount;
         }
-LikeUnLikeButton();
+
+        window.onload = function() {
+          element.innerHTML = localStorage.clickcount;
+        };
+          
+          
 
         </script>
         {% endblock %}
