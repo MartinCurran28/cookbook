@@ -23,6 +23,11 @@ def get_breakfast():
     return render_template("breakfast.html",
     recipes = mongo.db.recipes.find())
     
+@app.route('/get_lunch')
+def get_lunch():
+    return render_template("lunch.html",
+    recipes = mongo.db.recipes.find())    
+    
 @app.route('/add_recipe')
 def add_recipe():
     return render_template('addrecipe.html',
@@ -32,7 +37,7 @@ def add_recipe():
 def insert_recipe():
     recipes =  mongo.db.recipes
     recipes.insert_one(request.form.to_dict())
-    return redirect(url_for('get_breakfast'))
+    return redirect(url_for('get_categories'))
     
 @app.route('/graphs')
 def graphs():
