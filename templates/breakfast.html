@@ -1,10 +1,27 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
-<div class="container">        
+<div class="container">  
     <div class="row">
-        <button><a href="{{url_for('get_categories')}}">Back to Categories</a></button>
+    <header>
+        <nav>
+            <div class="nav-wrapper">
+                <a href="{{url_for('get_categories')}}" class="brand-logo">Task Manager</a>
+                <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    <li><a href="{{url_for('get_categories')}}">Home</a></li>
+                    <li><a href="{{url_for('add_recipe')}}">Add a Recipe!</a></li>
+                    <li><a href="{{url_for('graphs')}}">Statistics</a></li>
+                </ul>
+                <ul class="side-nav" id="mobile-demo">
+                    <li><a href="{{url_for('get_breakfast')}}">Breakfast</a></li>
+                    <li><a href="{{url_for('get_lunch')}}">Lunch</a></li>
+                    <li><a href="{{url_for('get_dinner')}}">Dinner</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    
       <ul class="collapsible" data-collapsible="accordion">
         {% for recipe in recipes %}
           {% if recipe.category_name == "Breakfast" %}
