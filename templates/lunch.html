@@ -7,7 +7,7 @@
         <button><a href="{{url_for('get_categories')}}">Back to Categories</a></button>
       <ul class="collapsible" data-collapsible="accordion">
         {% for recipe in recipes %}
-          {% if recipe.category_name == "Breakfast" %}
+          {% if recipe.category_name == "Lunch" %}
                 <li>
                     <div class="collapsible-header">
                         <div class="col s4">
