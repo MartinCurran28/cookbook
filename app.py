@@ -13,6 +13,20 @@ app.config["MONGO_URI"] = 'mongodb://admin:Vonnegut28@ds227654.mlab.com:27654/my
 mongo = PyMongo(app)
 
 @app.route('/')
+@app.route('/user')
+def index():
+    return render_template('login.html')
+
+@app.route('/login', methods=["GET","POST"])
+def login():
+    users = mongo.db.users
+    client = users.find_one({'username' : request.form['username']})
+
+    if client:
+        session['username'] = request.form['username']
+        return redirect(url_for('get_categories'))
+    else:    
+        return  " is not a valid username"  
 
 @app.route('/get_categories')
 def get_categories():
@@ -80,12 +94,12 @@ def update_recipe(recipe_id):
         'prep_time':request.form.get['prep_time'],
         'cooking_time':request.form.get['cooking_time']
     })
-    return redirect(url_for('get_breakfast'))
+    return redirect(url_for('get_categories'))
     
 @app.route('/delete_recipe/<recipe_id>')
 def delete_recipe(recipe_id):
     mongo.db.recipes.remove({"_id": ObjectId(recipe_id)})
-    return redirect(url_for('get_breakfast'))
+    return redirect(url_for('get_categories'))
 
     
 if __name__ == "__main__":
