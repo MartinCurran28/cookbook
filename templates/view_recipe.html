@@ -1,0 +1,58 @@
+{% extends 'base.html' %} {% block content %}
+
+ <div class="container">
+             <nav class="navbar navbar-inverse">
+              <div class="container-fluid">
+                <div class="navbar-header">
+                  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>                        
+                  </button>
+                  <a class="navbar-brand" href="#">Cook Book</a>
+                </div>
+                <div class="collapse navbar-collapse" id="myNavbar">
+                  <ul class="nav navbar-nav">
+                    <li><a href="{{url_for('get_categories')}}">Home</a></li>
+                    <li><a href="{{url_for('add_recipe')}}">Add a Recipe!</a></li>
+                    <li><a href="{{url_for('graphs')}}">Statistics</a></li>
+                  </ul>
+                  <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#"><span class="glyphicon glyphicon-user"></span> Welcome {{session['username']}}</a></li>
+                    <li><a href={{url_for('user')}}><span class="glyphicon glyphicon-shopping-cart"></span>Log in</a></li>
+                    <li><a href={{url_for('register')}}><span class="glyphicon glyphicon-shopping-cart"></span>Register</a></li>
+                  </ul>
+                </div>
+              </div>
+            </nav>
+          </div>  
+
+<div class="container">
+    <div class="row">
+     <form  action="{{ url_for('insert_recipe') }}" method="POST" class="col s12">
+        <div class="row">
+                <span>
+                    
+                    <h3>{{ recipe.recipe_name }} by {{ recipe.recipe_author }}</h3>
+                        <strong>Category:</strong>  
+                          {{ recipe.category_name }}
+                        <br>  
+                        <strong>Ingredients:</strong><p>
+                            {{recipe.ingredients}}</p>
+                        <br>
+                          <strong>Directions:</strong> 
+                          <p>{{recipe.directions}}</p>
+                        <br>
+                        <strong>Preparation Time:</strong> {{ recipe.prep_time }}
+                        <br>
+                        <strong>Cooking Time:</strong> {{ recipe.cooking_time }}
+                        <br>
+                        <strong>Views</strong>
+                      </span>
+            </div>  
+        </div>
+     </form>
+    </div> 
+</div>
+
+{% endblock %}

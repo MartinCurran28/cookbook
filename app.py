@@ -13,8 +13,13 @@ app.config["MONGO_URI"] = 'mongodb://admin:Vonnegut28@ds227654.mlab.com:27654/my
 mongo = PyMongo(app)
 
 @app.route('/')
+    
+@app.route('/get_categories')
+def get_categories():
+    return render_template("categories.html")
+    
 @app.route('/user')
-def index():
+def user():
     return render_template('login.html')
 
 @app.route('/login', methods=["GET","POST"])
@@ -26,17 +31,25 @@ def login():
         session['username'] = request.form['username']
         return redirect(url_for('get_categories'))
     else:    
-        return  " is not a valid username"  
+        return  "not a valid username"
+        
+@app.route('/register')
+def register():
+    return render_template("registration.html",
+    users=mongo.db.users.find())
 
-@app.route('/get_categories')
-def get_categories():
-    return render_template("categories.html")
-
+@app.route('/user_info', methods=['POST'])
+def user_info():
+    users =  mongo.db.users
+    users.insert_one(request.form.to_dict())
+    return redirect(url_for('user'))
+    
+    
 @app.route('/get_breakfast')
 def get_breakfast():
-    return render_template("breakfast.html",
+    return render_template('breakfast.html',
     recipes = mongo.db.recipes.find())
-    
+
 @app.route('/get_lunch')
 def get_lunch():
     return render_template("lunch.html",
@@ -57,6 +70,7 @@ def insert_recipe():
     recipes =  mongo.db.recipes
     recipes.insert_one(request.form.to_dict())
     return redirect(url_for('get_categories'))
+    
     
 @app.route('/graphs')
 def graphs():
@@ -93,14 +107,23 @@ def update_recipe(recipe_id):
         'directions': request.form.get['directions'],
         'prep_time':request.form.get['prep_time'],
         'cooking_time':request.form.get['cooking_time']
+        
     })
     return redirect(url_for('get_categories'))
+    
+ 
     
 @app.route('/delete_recipe/<recipe_id>')
 def delete_recipe(recipe_id):
     mongo.db.recipes.remove({"_id": ObjectId(recipe_id)})
     return redirect(url_for('get_categories'))
+    
 
+@app.route('/view_recipe/<recipe_id>')
+def view_recipe(recipe_id):
+    the_recipe =  mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
+    all_categories = mongo.db.categories.find()
+    return render_template('view_recipe.html', recipe=the_recipe, categories=all_categories)
     
 if __name__ == "__main__":
     app.secret_key = 'mysecret'
