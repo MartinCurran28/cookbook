@@ -115,8 +115,7 @@ def update_recipe(recipe_id):
         'ingredients': request.form.get['ingredients'],
         'directions': request.form.get['directions'],
         'prep_time':request.form.get['prep_time'],
-        'cooking_time':request.form.get['cooking_time'],
-        'views': int(0)
+        'cooking_time':request.form.get['cooking_time']
         
     })
     return redirect(url_for('get_categories'))
@@ -131,9 +130,12 @@ def delete_recipe(recipe_id):
 def view_recipe(recipe_id):
     the_recipe =  mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
     all_categories = mongo.db.categories.find()
-    views = int(the_recipe['views']) + 1
-    mongo.db.recipes.update({'_id': str(recipe_id)}, {'views': views})
     return render_template('view_recipe.html', recipe=the_recipe, categories=all_categories)
+    
+@app.route('/view_count/<recipe_id>')
+def view_count(recipe_id):
+   
+   return url_for('view_recipe.html')        
 
     
 if __name__ == "__main__":
